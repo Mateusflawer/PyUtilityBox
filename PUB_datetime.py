@@ -1,21 +1,22 @@
 import datetime
 
-def dividir_dias_em_periodos(dias: int, delta_dias_periodo=30) -> list:
-    """Divide períodos em partes retornando uma lista com os períodos."""
-    periodos = []
+def divide_days_into_periods(days: int, period_days_delta=30) -> list:
+    """Divides days into periods, returning a list of the periods."""
+    periods = []
 
-    datahora_agora = datetime.datetime.now()
+    current_datetime = datetime.datetime.now()
 
-    if dias < delta_dias_periodo:
-        datahora_agora_menos_dias = datahora_agora - datetime.timedelta(days=dias)
-        return [(datahora_agora_menos_dias, datahora_agora, 0)]
+    if days < period_days_delta:
+        datetime_minus_days = current_datetime - datetime.timedelta(days=days)
+        return [(datetime_minus_days, current_datetime, 0)]
     
-    while dias > 0:
-        datahora_menor = datahora_agora - datetime.timedelta(days=dias)
-        if dias > delta_dias_periodo:
-            datahora_maior = datahora_menor + datetime.timedelta(days=delta_dias_periodo)
+    while days > 0:
+        smaller_datetime = current_datetime - datetime.timedelta(days=days)
+        if days > period_days_delta:
+            larger_datetime = smaller_datetime + datetime.timedelta(days=period_days_delta)
         else:
-            datahora_maior = datahora_agora
-        dias_para_tras = abs(datahora_agora - datahora_maior).days
-        periodos.append((datahora_menor, datahora_maior, dias_para_tras))
-        dias -= delta_dias_periodo
+            larger_datetime = current_datetime
+        days_back = abs(current_datetime - larger_datetime).days
+        periods.append((smaller_datetime, larger_datetime, days_back))
+        days -= period_days_delta
+
