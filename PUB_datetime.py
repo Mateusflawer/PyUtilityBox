@@ -20,3 +20,4 @@ def divide_days_into_periods(days: int, period_days_delta=30) -> list:
         periods.append((smaller_datetime, larger_datetime, days_back))
         days -= period_days_delta
 
+    return periods
