@@ -1,7 +1,7 @@
 # PyUtilityBox
 
-PyUtilityBox is a repository dedicated to storing useful Python code for a wide variety of situations and needs. 
+PyUtilityBox é um repositório dedicado a armazenar código Python útil para uma ampla variedade de situações e necessidades. 
 
-Here, you will find scripts and snippets that can be easily integrated into different projects or used as quick solutions to common problems. 
-From simple automations to data manipulation and utility tools, this repository serves as a versatile toolbox for Python developers. 
-Add, adapt, and contribute to expand this set of practical resources!
+Aqui você encontrará scripts e snippets que podem ser facilmente integrados em diferentes projetos ou usados ​​como soluções rápidas para problemas comuns. 
+De automações simples a manipulação de dados e ferramentas utilitárias, este repositório serve como uma caixa de ferramentas versátil para desenvolvedores Python. 
+Adicione, adapte e contribua para ampliar esse conjunto de recursos práticos!
