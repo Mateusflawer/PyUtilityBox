@@ -1,6 +1,6 @@
 import datetime
 
-def divide_days_into_periods(days: int, period_days_delta=30) -> list:
+def divide_days_into_periods(days: int, period_days_delta=30) -> list[tuple[datetime.datetime, datetime.datetime, int]]:
     """Divides days into periods, returning a list of the periods."""
     periods = []
 
@@ -22,7 +22,7 @@ def divide_days_into_periods(days: int, period_days_delta=30) -> list:
 
     return periods
 
-def divide_hours_into_periods(hours: int, period_hours_delta=24) -> list:
+def divide_hours_into_periods(hours: int, period_hours_delta=24) -> list[tuple[datetime.datetime, datetime.datetime, int]]:
     """Divides hours into periods, returning a list of the periods."""
     periods = []
 
