@@ -1,5 +1,6 @@
 import datetime
 
+
 def divide_days_into_periods(days: int, period_days_delta=30) -> list[tuple[datetime.datetime, datetime.datetime, int]]:
     """Divides days into periods, returning a list of the periods."""
     periods = []
@@ -22,6 +23,7 @@ def divide_days_into_periods(days: int, period_days_delta=30) -> list[tuple[date
 
     return periods
 
+
 def divide_hours_into_periods(hours: int, period_hours_delta=24) -> list[tuple[datetime.datetime, datetime.datetime, int]]:
     """Divides hours into periods, returning a list of the periods."""
     periods = []
@@ -43,6 +45,7 @@ def divide_hours_into_periods(hours: int, period_hours_delta=24) -> list[tuple[d
         hours -= period_hours_delta
     
     return periods
+
 
 def generate_logs(days=1, days_ago=0, prefix="log_historico_") -> list:
     """
@@ -67,3 +70,56 @@ def generate_logs(days=1, days_ago=0, prefix="log_historico_") -> list:
         start_date += datetime.timedelta(days=1)
 
     return logs
+
+
+def convert_to_seconds(time_str: str) -> int:
+    """
+    Converte um horário no formato HH:MM:SS para o total em segundos.
+
+    Parameters:
+    time_str (str): String representando o horário no formato HH:MM:SS.
+
+    Returns:
+    int: O total de segundos representado pelo horário. Retorna 0 se o input for inválido ou None.
+    """
+    if time_str:
+        try:
+            # Dividir a string em horas, minutos e segundos
+            hours, minutes, seconds = map(int, time_str.split(':'))
+
+            # Calcular o total de segundos
+            return (hours * 3600) + (minutes * 60) + seconds
+        except ValueError:
+            # Retornar 0 se a string não estiver no formato correto
+            return 0
+    return 0
+
+
+def convert_to_time(seconds: int) -> str:
+    """
+    Converts a value in seconds to HH:MM:SS format.
+
+    Parameters:
+    seconds (int or str): The total number of seconds to be converted.
+
+    Returns:
+    str: A string representing the time in HH:MM:SS format.
+    """
+    if seconds:
+        if isinstance(seconds, str):
+            if not seconds.isnumeric():
+                return '00:00:00'
+            seconds = int(seconds)
+        
+        # Ensure seconds is not negative and is an integer
+        seconds = max(0, int(seconds))
+
+        # Calculate hours, minutes, and seconds
+        hours, remainder = divmod(seconds, 3600)
+        minutes, seconds = divmod(remainder, 60)
+
+        # Format the output in the desired format
+        return f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+
+    return '00:00:00'
+
