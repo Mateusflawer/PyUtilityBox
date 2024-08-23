@@ -1,4 +1,4 @@
-def extrat_pattern_content(string, string_padrao, inicio_padrao='[', fim_padrao=']', up=False):
+def extrat_pattern_content(string, string_padrao, inicio_padrao='[', fim_padrao=']', up=False) -> str:
     """
     Busca um padrão específico dentro de uma string e retorna o conteúdo encontrado entre os delimitadores definidos.
     
@@ -38,4 +38,3 @@ def extrat_pattern_content(string, string_padrao, inicio_padrao='[', fim_padrao=
         return conteudo.upper()
 
     return conteudo
-  
