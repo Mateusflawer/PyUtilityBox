@@ -43,3 +43,27 @@ def divide_hours_into_periods(hours: int, period_hours_delta=24) -> list:
         hours -= period_hours_delta
     
     return periods
+
+def generate_logs(days=1, days_ago=0, prefix="log_historico_") -> list:
+    """
+    Retorna uma lista de nomes de tabelas para consultar no banco de dados, baseando-se em uma faixa de dias.
+
+    Parameters:
+    days (int): Número de dias para gerar logs, incluindo o dia inicial. Valor padrão é 1.
+    days_ago (int): Quantos dias atrás deve começar a contagem. Valor padrão é 0 (hoje).
+    prefix (str): Prefixo para o nome das tabelas. Valor padrão é 'log_historico_'.
+
+    Returns:
+    list: Lista de nomes de tabelas com o prefixo e a data formatada.
+    """
+    logs = []
+    now = datetime.date.today()
+    end_date = now - datetime.timedelta(days=days_ago)
+    start_date = end_date - datetime.timedelta(days=(days-1))
+
+    while start_date <= end_date:
+        log_name = f"{prefix}{start_date.strftime('%d%m%Y')}"
+        logs.append(log_name)
+        start_date += datetime.timedelta(days=1)
+
+    return logs
