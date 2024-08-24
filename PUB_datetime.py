@@ -2,22 +2,24 @@ import datetime
 
 
 def divide_days_into_periods(days: int, period_days_delta=30) -> list[tuple[datetime.datetime, datetime.datetime, int]]:
-    """Divides days into periods, returning a list of the periods."""
+    """Divides a number of days into periods of length `period_days_delta`, returning a list of tuples containing 
+    the start date, end date, and number of days in the period."""
+    
+    if days <= 0:
+        raise ValueError("The number of days must be greater than zero.")
+    
     periods = []
-
     current_datetime = datetime.datetime.now()
 
-    if days < period_days_delta:
-        datetime_minus_days = current_datetime - datetime.timedelta(days=days)
-        return [(datetime_minus_days, current_datetime, 0)]
-    
     while days > 0:
-        smaller_datetime = current_datetime - datetime.timedelta(days=days)
-        if days > period_days_delta:
-            larger_datetime = smaller_datetime + datetime.timedelta(days=period_days_delta)
-        else:
+        if days <= period_days_delta:
+            smaller_datetime = current_datetime - datetime.timedelta(days=days)
             larger_datetime = current_datetime
-        days_back = abs(current_datetime - larger_datetime).days
+        else:
+            smaller_datetime = current_datetime - datetime.timedelta(days=days)
+            larger_datetime = smaller_datetime + datetime.timedelta(days=period_days_delta)
+
+        days_back = (larger_datetime - smaller_datetime).days
         periods.append((smaller_datetime, larger_datetime, days_back))
         days -= period_days_delta
 
@@ -25,26 +27,29 @@ def divide_days_into_periods(days: int, period_days_delta=30) -> list[tuple[date
 
 
 def divide_hours_into_periods(hours: int, period_hours_delta=24) -> list[tuple[datetime.datetime, datetime.datetime, int]]:
-    """Divides hours into periods, returning a list of the periods."""
+    """Divides a number of hours into periods of length `period_hours_delta`, returning a list of tuples containing 
+    the start date, end date, and number of hours in the period."""
+    
+    if hours <= 0:
+        raise ValueError("The number of hours must be greater than zero.")
+    
     periods = []
-
     current_datetime = datetime.datetime.now()
 
-    if hours < period_hours_delta:
-        datetime_minus_hours = current_datetime - datetime.timedelta(hours=hours)
-        return [(datetime_minus_hours, current_datetime, 0)]
-    
     while hours > 0:
-        smaller_datetime = current_datetime - datetime.timedelta(hours=hours)
-        if hours > period_hours_delta:
-            larger_datetime = smaller_datetime + datetime.timedelta(hours=period_hours_delta)
-        else:
+        if hours <= period_hours_delta:
+            smaller_datetime = current_datetime - datetime.timedelta(hours=hours)
             larger_datetime = current_datetime
-        hours_back = abs(current_datetime - larger_datetime).seconds // 3600
+        else:
+            smaller_datetime = current_datetime - datetime.timedelta(hours=hours)
+            larger_datetime = smaller_datetime + datetime.timedelta(hours=period_hours_delta)
+
+        hours_back = (larger_datetime - smaller_datetime).seconds // 3600
         periods.append((smaller_datetime, larger_datetime, hours_back))
         hours -= period_hours_delta
     
     return periods
+
 
 
 def generate_logs(days=1, days_ago=0, prefix="log_historico_") -> list:
