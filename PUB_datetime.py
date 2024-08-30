@@ -100,6 +100,30 @@ def convert_to_seconds(time_str: str) -> int:
     return 0
 
 
+def convert_to_hours(time_str: str) -> float:
+    """
+    Converte um horário no formato HH:MM:SS para o total em horas.
+
+    Parameters:
+    time_str (str): String representando o horário no formato HH:MM:SS.
+
+    Returns:
+    float: O total de horas representado pelo horário. Retorna 0 se o input for inválido ou None.
+    """
+    if time_str:
+        try:
+            # Dividir a string em horas, minutos e segundos
+            hours, minutes, seconds = map(int, time_str.split(':'))
+
+            # Calcular o total de horas
+            total_hours = hours + (minutes / 60) + (seconds / 3600)
+            return total_hours
+        except ValueError:
+            # Retornar 0 se a string não estiver no formato correto
+            return 0.0
+    return 0.0
+
+
 def convert_to_time(seconds: int) -> str:
     """
     Converts a value in seconds to HH:MM:SS format.
