@@ -128,3 +128,35 @@ def convert_to_time(seconds: int) -> str:
 
     return '00:00:00'
 
+def convert_hours_to_time(hours: float) -> str:
+    """
+    Converts a value in hours to HH:MM:SS format.
+
+    Parameters:
+    hours (int, float, or str): The total number of hours to be converted.
+
+    Returns:
+    str: A string representing the time in HH:MM:SS format.
+    """
+    if hours:
+        if isinstance(hours, str):
+            try:
+                hours = float(hours)
+            except ValueError:
+                return '00:00:00'
+        
+        # Ensure hours is not negative
+        hours = max(0, float(hours))
+
+        # Calculate total seconds
+        total_seconds = int(hours * 3600)
+
+        # Calculate hours, minutes, and seconds
+        hours, remainder = divmod(total_seconds, 3600)
+        minutes, seconds = divmod(remainder, 60)
+
+        # Format the output in the desired format
+        return f"{int(hours):02d}:{int(minutes):02d}:{int(seconds):02d}"
+
+    return '00:00:00'
+
